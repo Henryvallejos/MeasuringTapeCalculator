@@ -17,20 +17,28 @@
         <div class="container-flex">
             <div class="num-container">
                 <button id="clear-btn" value="clear" onclick="clearData()">Clear</button>
-                <button id="seven" class="num-btn"  value="seven" onclick="displaySeven()">7</button>
-                <button id="eight" class="num-btn"  value="eight" onclick="displayEight()">8</button>
-                <button id="nine" class="num-btn"  value="nine" onclick="displayNine()">9</button>
-                <button id="six" class="num-btn"  value="six" onclick="displaySix()">6</button>
-                <button id="five" class="num-btn"  value="five" onclick="displayFive()">5</button>
-                <button id="four" class="num-btn"  value="four" onclick="displayFour()">4</button>
-                <button id="three" class="num-btn"  value="three" onclick="displayThree()">3</button>
-                <button id="two" class="num-btn"  value="two" onclick="displayTwo()">2</button>
-                <button id="one" class="num-btn"  value="one" onclick="displayOne()">1</button>
-                <button id="zero" class="num-btn"  value="zero" onclick="displayZero()">0</button>
+                <button id="seven" class="num-btn"  value="seven" onclick="displayNum(7)">7</button>
+                <button id="eight" class="num-btn"  value="eight" onclick="displayNum(8)">8</button>
+                <button id="nine" class="num-btn"  value="nine" onclick="displayNum(9)">9</button>
+                <button id="six" class="num-btn"  value="six" onclick="displayNum(6)">6</button>
+                <button id="five" class="num-btn"  value="five" onclick="displayNum(5)">5</button>
+                <button id="four" class="num-btn"  value="four" onclick="displayNum(4)">4</button>
+                <button id="three" class="num-btn"  value="three" onclick="displayNum(3)">3</button>
+                <button id="two" class="num-btn"  value="two" onclick="displayNum(2)">2</button>
+                <button id="one" class="num-btn"  value="one" onclick="displayNum(1)">1</button>
+                <button id="zero" class="num-btn"  value="zero" onclick="displayNum(0)">0</button>
             </div>
             <div class="side-container">
-                <button id="plus-btn" value="add" onclick="displayAdditionSign()">+</button>
-                <button id="minus-btn" value="minus" onclick="displaySubtractionSign()">-</button>
+                <button id="one-qaurter-btn" class="special-btn" value="" onclick="displayOneQuarter()">1/4</button>
+                <button id="half-inch-btn" class="special-btn" value="" onclick="displayHalfInch()">1/2</button>
+                <button id="three-quarter-btn" class="special-btn" value="" onclick="displayThreeQuarter()">3/4</button>
+                <button id="inch-inches-btn" class="special-btn" value="" onclick="displayInch()">inch/inches</button>
+                <!-- <button id="" value="" onclick=""></button>
+                <button id="" value="" onclick=""></button> -->
+
+
+                <button id="plus-btn" value="add" onclick="additionBtnClicked()">+</button>
+                <button id="minus-btn" value="minus" onclick="subtractionBtnClicked()">-</button>
                 <button id="equal-btn" value="equal" onclick="calculate()">=</button>
                 
             </div>

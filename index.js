@@ -1,61 +1,54 @@
-function displayZero() {
-    displayData.textContent += 0
-    currentData += 0
+function displayNum(num) {
+    
+    if (hasAdditionBtnClicked) {
+        currentValue += Number(num)
+        console.log("currentValue", currentValue)
+        hasAdditionBtnClicked = false
+    }
+    else if (hasSubtractionBtnClicked) {
+        currentValue -= Number(num)
+        console.log("currentValue", currentValue)
+        hasSubtractionBtnClicked = false
+    }
+    else {
+        currentValue += Number(num)
+    }
+ 
+    displayData.textContent += num
+    console.log("num", num)
 }
 
-function displayOne() {
-    displayData.textContent += 1
-    currentData += 1
+function additionBtnClicked() {
+    hasAdditionBtnClicked = true
+    displayData.textContent += " + "
+    console.log("addition clicked")
 }
 
-function displayTwo() {
-    displayData.textContent += 2
-    currentData += 2
+function subtractionBtnClicked() {
+    hasSubtractionBtnClicked = true
+    displayData.textContent += " - "
+    console.log("subtraction clicked")
 }
 
-function displayThree() {
-    displayData.textContent += 3
-    currentData += 3
+function displayOneQuarter() {
+    displayData.textContent += " 1/4"
+    currentValue += quarterInch
+    console.log("current value ",currentValue)
+    console.log("current data ",currentData)
 }
 
-function displayFour() {
-    displayData.textContent += 4
-    currentData += 4
+function displayHalfInch() {
+    displayData.textContent += " 1/2"
+    currentValue += halfInch
 }
 
-function displayFive() {
-    displayData.textContent += 5
-    currentData += 5
+function displayThreeQuarter() {
+    displayData.textContent += " 3/4"
+    currentValue += threeQuarter
 }
 
-function displaySix() {
-    displayData.textContent += 6
-    currentData += 6
-}
-
-function displaySeven() {
-    displayData.textContent += 7
-    currentData += 7
-}
-
-function displayEight() {
-    displayData.textContent += 8
-    currentData += 8
-}
-
-function displayNine() {
-    displayData.textContent += 9
-    currentData += 9
-}
-
-function displayAdditionSign() {
-    displayData.textContent += "+"
-    currentData += "+"
-}
-
-function displaySubtractionSign() {
-    displayData.textContent += "-"
-    currentData += "-"
+function displayInch() {
+    displayData.textContent += " inch/inches"
 }
 
 function add(a, b) {
@@ -68,22 +61,7 @@ function subtract(a, b) {
 
 function calculate() {
 
-   
-    const user_input = displayData.textContent
-
-    if (user_input.includes("+")) {
-        const [a, b] = user_input.split("+").map(Number)
-        displayData.textContent = add(a, b)
-        currentData += ":"
-
-        console.log(currentData)
-    
-    } else if (user_input.includes("-")) {
-        const [a, b] = user_input.split("-").map(Number)
-        displayData.textContent += ":" + subtract(a, b)
-        currentData += ":"
-        console.log(currentData)
-    } 
+   displayData.textContent = currentValue
 
 }
 
@@ -91,15 +69,20 @@ function calculate() {
 function clearData() {
     displayData.textContent = ""
     currentData = ""
+    currentValue = 0
 }
 
-function displayAri() {
-
-}
-
-let halfInch = 0.5
+let halfInch = 0.50
 let quarterInch = .25
 let threeQuarter = .75
+let oneEighth = 0.125
+let threeEighth = 0.375
+let fiveEighth = 0.625
+let sevenEighth = 0.875
+let hasAdditionBtnClicked = false
+let hasSubtractionBtnClicked = false
+
+let currentValue = 0
 
 let currentData = document.getElementById("current-data-el")
 let displayData = document.getElementById("display-data-el")
