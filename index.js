@@ -1,54 +1,66 @@
 function displayNum(num) {
     
-    if (hasAdditionBtnClicked) {
-        currentValue += Number(num)
-        console.log("currentValue", currentValue)
-        hasAdditionBtnClicked = false
-    }
-    else if (hasSubtractionBtnClicked) {
-        currentValue -= Number(num)
-        console.log("currentValue", currentValue)
-        hasSubtractionBtnClicked = false
-    }
-    else {
-        currentValue += Number(num)
-    }
- 
-    displayData.textContent += num
-    console.log("num", num)
+    currentInput += num
+    updateDisplay()
+    // displayData.textContent = formatFraction(Number(currentInput))
 }
 
 function additionBtnClicked() {
-    hasAdditionBtnClicked = true
-    displayData.textContent += " + "
-    console.log("addition clicked")
+    if (currentInput !== "") {
+       currentValue = Number(currentInput) 
+       expression = formatFraction(currentValue)
+    }
+    
+    currentInput = ""
+    operator = "+"
+    expression += " + "
+    updateDisplay()
 }
 
 function subtractionBtnClicked() {
-    hasSubtractionBtnClicked = true
-    displayData.textContent += " - "
-    console.log("subtraction clicked")
+    if (currentInput !== "") {
+      currentValue = Number(currentInput) 
+      expression = formatFraction(currentValue) 
+    }
+    
+    currentInput = ""
+    operator = "-"
+    updateDisplay()
 }
 
 function displayOneQuarter() {
-    displayData.textContent += " 1/4"
-    currentValue += quarterInch
-    console.log("current value ",currentValue)
-    console.log("current data ",currentData)
+   currentInput = String(Number(currentInput || 0) + quarterInch)
+   updateDisplay()
 }
 
 function displayHalfInch() {
-    displayData.textContent += " 1/2"
-    currentValue += halfInch
+    currentInput = String(Number(currentInput || 0) + halfInch)
+    updateDisplay()
 }
 
 function displayThreeQuarter() {
-    displayData.textContent += " 3/4"
-    currentValue += threeQuarter
+    currentInput = String(Number(currentInput || 0) + threeQuarter)
+    updateDisplay()
 }
 
-function displayInch() {
-    displayData.textContent += " inch/inches"
+function displayOneEigth() {
+    currentInput = String(Number(currentInput || 0) + oneEighth)
+    updateDisplay()
+}
+
+function displayThreeEigth() {
+    currentInput = String(Number(currentInput || 0) + threeEighth)
+    updateDisplay()    
+}
+
+function displayFiveEigth() {
+    currentInput = String(Number(currentInput || 0) + fiveEighth)
+    updateDisplay()    
+}
+
+function displaySevenEigth() {
+    currentInput = String(Number(currentInput || 0) + sevenEighth)
+    updateDisplay()    
 }
 
 function add(a, b) {
@@ -61,15 +73,67 @@ function subtract(a, b) {
 
 function calculate() {
 
-   displayData.textContent = currentValue
+   let secondValue = Number(currentInput)
 
+   //Adds second num to expression
+   expression += formatFraction(secondValue)
+
+   if (operator === "+") {
+    currentValue += secondValue
+   } else if (operator === "-") {
+    currentValue -= secondValue
+   }
+
+   //Show full expression + result
+   displayData.textContent = expression + " = " + formatFraction(currentValue)
+
+   //Reset for next calulation
+   currentInput = ""
+   operator = null 
+   expression = formatFraction(currentValue) // allows chaining
+   
 }
 
+function updateDisplay() {
+    let inputPart = currentInput ? formatFraction(Number(currentInput)) : ""
+    displayData.textContent = expression + inputPart
+}
 
+function formatFraction(value) {
+    const fractionMap = {
+        0.125: "1/8",
+        0.25: "1/4",
+        0.375: "3/8",
+        0.5: "1/2",
+        0.625: "5/8",
+        0.75: "3/4",
+        0.875: "7/8"
+    }
+
+    let whole = Math.floor(value)
+    let decimal = value - whole
+
+    //Fix floating point issues
+    decimal = Math.round(decimal * 1000) / 1000
+
+    if (decimal === 0) return String(whole)
+
+    if (fractionMap[decimal]) {
+        if (whole === 0) {
+            return fractionMap[decimal]
+        }
+        return `${whole} ${fractionMap[decimal]}`
+    }
+
+    return value.toFixed(2) // fallback
+}
+
+//Clear data from display and resets variables
 function clearData() {
     displayData.textContent = ""
-    currentData = ""
+    currentInput = ""
     currentValue = 0
+    operator = null
 }
 
 let halfInch = 0.50
@@ -79,10 +143,11 @@ let oneEighth = 0.125
 let threeEighth = 0.375
 let fiveEighth = 0.625
 let sevenEighth = 0.875
-let hasAdditionBtnClicked = false
-let hasSubtractionBtnClicked = false
 
-let currentValue = 0
+let currentValue = 0 //num for calculation
+let currentInput = ""
+let operator = null
+let expression = "" //string for display
 
 let currentData = document.getElementById("current-data-el")
 let displayData = document.getElementById("display-data-el")
